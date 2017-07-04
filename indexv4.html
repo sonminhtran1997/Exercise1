@@ -24,27 +24,30 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#save").click(function() {
-				var selection ="";
 				var count = 1;
-				var checkbox = $("[name='box']");
 				var e = $("#role :selected").text();
 				var output = $("#output");
 				var fname = $("#fname").val();
 				var lname = $("#lname").val();
 				var gender = $("input[name='gender']:checked").val();
-
-				for (var i = 0; i < checkbox.length; i++) {
-					if (checkbox[i].checked) {
-						selection += (count + "." + checkbox[i].value + "<br>")
-						count++;
-					}
-				}
+				var selection = $("input[name='box']:checked");
+				// for (var i = 0; i < checkbox.length; i++) {
+				// 	if (checkbox[i].checked) {
+				// 		selection += (count + "." + checkbox[i].value + "<br>")
+				// 		count++;
+				// 	}
+				// }
+				console.log(selection);
 				var html = "Here is the information you just input" + "<br>" +
 				"Your first name: " + fname + "<br>" +
 				"Your last name: " + lname + "<br>" +
 				"Your gender: " + gender + "<br>" +		
 				"Your role: " + e + "<br>" + 
-				"Your favorite: " + "<br>" + selection + "<br>";
+				"Your favorite: " + "<br>";
+				for (var i = 0; i < selection.length; i++) {
+					html += (i+1)  +  "." + selection[i].value + "<br>";
+				}
+				html+="<br>";
 				$("#output").html(html);
 				
 
@@ -65,7 +68,7 @@
 			for (var i = 0; i < dropOption.length; i++) {
 				html += '<option value="' + dropOption[i] + '" id="opt' + i + '">'+ dropOption[i] + '</option>';
 			}
-			select.hmtl(html);
+			select.html(html);
 		});
 	</script>
 </head>
