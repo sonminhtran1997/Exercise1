@@ -13,7 +13,7 @@
 			text-align: left;
 		}
 		#survey_form{
-			max-width: 70vh;
+			max-width: 80vh;
 			min-height: 30vh;
 		}
 		#output_area{
@@ -26,13 +26,12 @@
 			$("#save").click(function() {
 				var selection ="";
 				var count = 1;
-				var radios = $("[name='gender']");
 				var checkbox = $("[name='box']");
 				var e = $("#role :selected").text();
 				var output = $("#output");
 				var fname = $("#fname").val();
 				var lname = $("#lname").val();
-				var gender = radios[0].checked ? radios[0].value : radios[1].value;
+				var gender = $("input[name='gender']:checked").val();
 
 				for (var i = 0; i < checkbox.length; i++) {
 					if (checkbox[i].checked) {
