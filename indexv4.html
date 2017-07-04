@@ -20,56 +20,57 @@
 			border-style: inset;
 		}
 	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript">
-		function save() {	
-			var selection ="";
-			var count = 1;
-			var radios = document.getElementsByName("gender");
-			var checkbox = document.getElementsByName("box")
-			var e = document.getElementById("role").selectedIndex;
-			var out = document.getElementById("output");
-			var fname = document.getElementById("fname").value;
-			var lname = document.getElementById("lname").value;
-			var gender = radios[0].checked ? radios[0].value : radios[1].value;
-			
-			for (var i = 0; i < checkbox.length; i++) {
-				if (checkbox[i].checked) {
-					selection += (count + "." + checkbox[i].value + "<br>")
-					count++;
-				}
-			}
-			role = document.getElementById("role")[e].value;
-			document.getElementById("output").innerHTML=
-			"Here is the information you just input" + "<br>" +
-			"Your first name: " + fname + "<br>" +
-			"Your last name: " + lname + "<br>" +
-			"Your gender: " + gender + "<br>" +		
-			"Your role: " + role + "<br>" + 
-			"Your favorite: " + "<br>" + selection + "<br>";
-			// for (var i = 0; i < selection.length; i++) {
-			// 	document.getElementById("output").innerHTML += ((i+1) + "." + selection[i] + "<br>");
-			// }
-		}
+		$(document).ready(function() {
+			$("#save").click(function() {
+				var selection ="";
+				var count = 1;
+				var radios = $("[name='gender']");
+				var checkbox = $("[name='box']");
+				var e = $("#role :selected").text();
+				var output = $("#output");
+				var fname = $("#fname").val();
+				var lname = $("#lname").val();
+				var gender = radios[0].checked ? radios[0].value : radios[1].value;
 
-		function callOnLoad () {
+				for (var i = 0; i < checkbox.length; i++) {
+					if (checkbox[i].checked) {
+						selection += (count + "." + checkbox[i].value + "<br>")
+						count++;
+					}
+				}
+				var html = "Here is the information you just input" + "<br>" +
+				"Your first name: " + fname + "<br>" +
+				"Your last name: " + lname + "<br>" +
+				"Your gender: " + gender + "<br>" +		
+				"Your role: " + e + "<br>" + 
+				"Your favorite: " + "<br>" + selection + "<br>";
+				$("#output").html(html);
+				
+
+			});	
+		});
+
+		$("body").ready(function() {
 			var checkOption = ["Soccer", "Badminton", "Swimming", "Billiard", "Gaming", "Wrestling"];
 			var dropOption = ["Admin", "Mod", "User", "Rsesident"];
-			var favorite = document.getElementById("favorite");
-			var select = document.getElementById("role");
+			var favorite = $("#favorite");
+			var select = $("role");
 			var html = "";
 			for (var i = 0; i < checkOption.length; i++) {
 				html += '<label>' + '<input type="checkbox" name="box" id="fav' + i + '" value="' + checkOption[i] + '">' + checkOption[i] + '</label>';
 			}
-			favorite.innerHTML = html;
+			favorite.html(html);
 			html = "";
 			for (var i = 0; i < dropOption.length; i++) {
 				html += '<option value="' + dropOption[i] + '" id="opt' + i + '">'+ dropOption[i] + '</option>';
 			}
-			select.innerHTML = html;
-		}
+			select.hmtl(html);
+		});
 	</script>
 </head>
-<body onload="callOnLoad()">
+<body>
 	<fieldset id="survey_form">
 		<legend style="color:blue;font-weight:bold;">Survey</legend>
 		<form name="myform" action="" method="GET" style="position: relative">
@@ -97,12 +98,18 @@
 			</tr>
 			<tr>
 				<th>Role:</th>
-				<td><select id="role"></select></th>
+				<td>
+					<select id="role">
+						<option value="admin">admin</option>
+						<option value="user">user</option>
+						<option value="mod">mod</option>
+					</select>
+				</td>
 				<br>
 			</tr>
 		</table>	
 		<br>
-    	<input class="lower_right_button" type="button" onclick="save()" value="Save">
+    	<input id="save" class="lower_right_button" type="button" value="Save">
 		</form>
 		<fieldset id="output_area">
 			<legend style="color:red">OUTPUT</legend>
