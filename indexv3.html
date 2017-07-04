@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Exercise 1</title>
+	<style type="text/css" media="screen">
+		.lower_right_button{
+			position:absolute;
+    		bottom: 0;
+    		right: 0;
+		}
+		#survey_form{
+			width: 70vh;
+			height: 50vh;
+		}
+		#output_area{
+			border-style: inset;
+		}
+	</style>
+	<script type="text/javascript">
+		function save() {	
+			var gender;
+			var selection ="";
+			var count = 1;
+			var radios = document.getElementsByName("gender");
+			var checkbox = document.getElementsByName("box")
+			var e = document.getElementById("role").selectedIndex;
+			var out = document.getElementById("output");
+			var fname = document.getElementById("fname").value;
+			var lname = document.getElementById("lname").value;
+			for (var i = 0; i < radios.length; i++) {
+				if (radios[i].checked) {
+					gender = radios[i].value;
+					break;
+				}
+			}
+			for (var i = 0; i < checkbox.length; i++) {
+				if (checkbox[i].checked) {
+					selection += (count + "." + checkbox[i].value + "<br>")
+					count++;
+				}
+			}
+			role = document.getElementById("role")[e].value;
+			document.getElementById("output").innerHTML=
+			"Here is the information you just input" + "<br>" +
+			"Your first name: " + fname + "<br>" +
+			"Your last name: " + lname + "<br>" +
+			"Your gender: " + gender + "<br>" +		
+			"Your role: " + role + "<br>" + 
+			"Your favorite: " + "<br>" + selection + "<br>";
+			// for (var i = 0; i < selection.length; i++) {
+			// 	document.getElementById("output").innerHTML += ((i+1) + "." + selection[i] + "<br>");
+			// }
+		}
+
+		function callOnLoad () {
+			var checkOption = ["Soccer", "Badminton", "Swimming", "Billiard", "Gaming", "Wrestling"];
+			var dropOption = ["Admin", "Mod", "User", "Rsesident"];
+			var favorite = document.getElementById("favorite");
+			var select = document.getElementById("role");
+			var html = "";
+			for (var i = 0; i < checkOption.length; i++) {
+				html += '<label>' + '<input type="checkbox" name="box" id="fav' + i + '" value="' + checkOption[i] + '">' + checkOption[i] + '</label>';
+			}
+			favorite.innerHTML = html;
+			html = "";
+			for (var i = 0; i < dropOption.length; i++) {
+				html += '<option value="' + dropOption[i] + '" id="opt' + i + '">'+ dropOption[i] + '</option>';
+			}
+			select.innerHTML = html;
+		}
+	</script>
+</head>
+<body onload="callOnLoad()">
+	<fieldset id="survey_form">
+		<legend style="color:blue;font-weight:bold;">Survey</legend>
+		<form name="myform" action="" method="GET" style="position: relative">
+		<table>
+			<tr>
+				<th>First Name: </th>
+				<td><input type="text" id="fname"><br></th>
+			</tr>
+			<tr>
+				<th>Last Name: </th>
+				<td><input type="text" id="lname"><br></th>	
+			</tr>
+			<tr>
+				<th>Gender:</th>
+				<td>
+					<div id="radio_area">
+						<label><input type="radio" name="gender" value="Male" checked="checked"> Male</label>
+						<label><input type="radio" name="gender" value="Female"> Female<br></label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>Favorite: </th>
+				<td><div id = "favorite"></div></th>
+			</tr>
+			<tr>
+				<th>Role:</th>
+				<td><select id="role"></select></th>
+				<br>
+			</tr>
+		</table>	
+		<br>
+    	<input class="lower_right_button" type="button" onclick="save()" value="Save">
+		</form>
+		<fieldset id="output_area">
+			<legend style="color:red">OUTPUT</legend>
+			<div id="output"></div>
+		</fieldset>
+		
+	</fieldset>
+</body>
+</html>

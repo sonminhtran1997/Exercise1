@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Exercise 1</title>
+	<script type="text/javascript">
+		function save() {
+			var fname, lname;		
+			var gender;
+			var selection =[];
+			var radios = document.getElementsByName("gender");
+			var checkbox = document.getElementsByName("box")
+			var e = document.getElementById("role").selectedIndex;
+			var out = document.getElementById("output");
+
+			fname = document.getElementById("fname").value;
+			lname = document.getElementById("lname").value;
+			for (var i = 0; i < radios.length; i++) {
+				if (radios[i].checked) {
+					gender = radios[i].value;
+					break;
+				}
+			}
+			for (var i = 0; i < checkbox.length; i++) {
+				if (checkbox[i].checked) {
+					selection.push(checkbox[i].value);
+				}
+			}
+			role = document.getElementById("role")[e].value;
+			document.getElementById("output").innerHTML=
+			"Here is the information you just input" + "<br>" +
+			"Your first name:" + fname + "<br>" +
+			"Your last name:" + lname + "<br>" +
+			"Your gender: " + gender + "<br>" +
+			"Your role:" + role + "<br>" + 
+			"Your favorite:" + "<br>";
+			for (var i = 0; i < selection.length; i++) {
+				document.getElementById("output").innerHTML += ((i+1) + "." + selection[i] + "<br>");
+			}
+		}
+
+		function callOnLoad () {
+			var checkOption = ["Soccer", "Badminton", "Swimming", "Billiard", "Gaming", "wrestling"];
+			var dropOption = ["admin", "mod", "user", "resident"];
+			var favorite = document.getElementById("favorite");
+			var select = document.getElementById("role");
+			for (var i = 0; i < checkOption.length; i++) {
+				var html = "";
+				html = '<label>' + '<input type="checkbox" name="box" id="fav' + i + '" value="' + checkOption[i] + '">' + checkOption[i] + '</label>';
+				favorite.innerHTML += html;
+			}
+
+			for (var i = 0; i < dropOption.length; i++) {
+				var html = "";
+				html += '<option value="' + dropOption[i] + '" id="opt' + i + '">'+ dropOption[i] + '</option>';
+				select.innerHTML += html;
+			}
+
+
+		}
+	</script>
+</head>
+<body onload="callOnLoad()">
+	<form name="myform" action="" method="GET">
+		<table>
+			<tr>
+				<th>First Name: </th>
+				<th><input type="text" id="fname"><br></th>
+			</tr>
+			<tr>
+				<th>Last Name: </th>
+				<th><input type="text" id="lname"><br></th>	
+			</tr>
+		</table>
+		<label><input type="radio" name="gender" value="Male" checked="checked"> Male</label>
+		<label><input type="radio" name="gender" value="Female"> Female<br></label>
+		Favorite: 
+		<div id = "favorite">
+			<!-- <script type="text/javascript">
+				var checkOption = ["Soccer", "Badminton", "Swimming", "Billiard", "Gaming", "wrestling"];
+				for (var i = 0; i < checkOption.length; i++) {
+					// var label = document.createElement("label");
+					// var option = document.createElement("input");
+					// option.setAttribute("type", "checkbox");
+					// option.setAttribute("name", "box");
+					// option.setAttribute("id", "fav" + i);
+					// option.setAttribute("value", checkOption[i]);
+					// label.appendChild(option);
+					// label.appendChild(document.createTextNode(checkOption[i]));
+					// document.getElementById("favorite").appendChild(label);
+				}
+			</script> -->
+			<option value="" id=""></option>
+		</div>
+		Role:
+		<select id="role">
+			<!-- <script type="text/javascript">
+				var dropOption = ["admin", "mod", "user", "resident"];
+				for (var i = 0; i < dropOption.length; i++) {
+					var option =  document.createElement("option");
+					var element = document.getElementById("role")
+					option.setAttribute("value", dropOption[i]);
+					option.text = dropOption[i];
+					element.add(option);
+				}
+			</script> -->
+
+		</select>
+		<br>
+		<input type="button" onclick="save()" value="Save">
+		<div id="output"></div>
+	</form>
+</body>
+</html>

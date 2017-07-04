@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Exercise 1</title>
+	<script type="text/javascript">
+		function save() {		
+			fname = document.myform.fname.value;
+			lname = document.myform.lname.value;
+			var gender;
+			var selection =[];
+			var e = document.getElementById("role").selectedIndex;
+			for (var i = 0; i < 2; i++) {
+				if (document.getElementById("gender" + i).checked) {
+					gender = document.getElementById("gender" + i).value;
+					break;
+				}
+			}
+			for (var i = 0; i < 5; i++) {
+				if (document.getElementById("fav" + i).checked) {
+					selection.push(document.getElementById("fav" + i).value);
+				}
+			}
+			role = document.getElementById("role")[e].value;
+			document.writeln("Here is the information you just input" + "<br>");
+			document.writeln("Your first name:" + fname + "<br>");
+			document.writeln("Your last name:" + lname + "<br>");
+			document.writeln("Your gender: " + gender + "<br>");
+			document.writeln("Your list of favorite:" + "<br>");
+			for (var i = 0; i < selection.length; i++) {
+				document.writeln((i+1) + ". " + selection[i] + "<br>");
+			}
+			document.writeln("Your role:" + role);
+		}
+	</script>
+</head>
+<body>
+	<form name="myform" action="" method="GET">
+		First Name: <input type="text" name="fname"><br>
+		Last Name: <input type="text" name="lname"><br>
+		<input type="radio" id="gender0" name="gender" value="Male"> Male
+		<input type="radio" id="gender1" name="gender" value="Female"> Female<br>
+		Favorite: 
+		<input type="checkbox" id="fav0" value="soccer"> Soccer
+		<input type="checkbox" id="fav1" value="badminton"> Badminton
+		<input type="checkbox" id="fav2" value="swimming"> Swimming
+		<input type="checkbox" id="fav3" value="billiard"> Billiard
+		<input type="checkbox" id="fav4" value="gaming">Gaming<br>
+		Role:
+		<select id="role">
+			<option value="admin">admin</option>
+			<option value="mod">mod</option>
+			<option value="user">user</option>
+		</select>
+		<br>
+		<input type="button" onclick="save();" value="Save">
+
+	</form>
+</body>
+</html>
